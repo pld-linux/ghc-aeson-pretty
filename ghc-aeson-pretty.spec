@@ -6,7 +6,7 @@
 Summary:	JSON pretty-printing library and command-line tool
 Name:		ghc-%{pkgname}
 Version:	0.8.8
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/aeson-pretty
@@ -15,11 +15,15 @@ Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{v
 URL:		http://hackage.haskell.org/package/aeson-pretty
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-aeson
+BuildRequires:	ghc-attoparsec >= 0.10
+BuildRequires:	ghc-cmdargs >= 0.7
 BuildRequires:	ghc-scientific
 BuildRequires:	ghc-vector
 %if %{with prof}
 BuildRequires:	ghc-prof
 BuildRequires:	ghc-aeson-prof
+BuildRequires:	ghc-attoparsec-prof >= 0.10
+BuildRequires:	ghc-cmdargs-prof >= 0.7
 BuildRequires:	ghc-scientific-prof
 BuildRequires:	ghc-vector-prof
 %endif
@@ -27,8 +31,10 @@ BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
 Requires(post,postun):	/usr/bin/ghc-pkg
 Requires:	ghc-aeson
-BuildRequires:	ghc-scientific
-BuildRequires:	ghc-vector
+Requires:	ghc-attoparsec >= 0.10
+Requires:	ghc-cmdargs >= 0.7
+Requires:	ghc-scientific
+Requires:	ghc-vector
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -55,8 +61,10 @@ Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ghc-aeson-prof
-BuildRequires:	ghc-scientific-prof
-BuildRequires:	ghc-vector-prof
+Requires:	ghc-attoparsec-prof >= 0.10
+Requires:	ghc-cmdargs-prof >= 0.7
+Requires:	ghc-scientific-prof
+Requires:	ghc-vector-prof
 
 %description prof
 Profiling %{pkgname} library for GHC.  Should be installed when
