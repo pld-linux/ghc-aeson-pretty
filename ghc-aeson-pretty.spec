@@ -6,7 +6,7 @@
 Summary:	JSON pretty-printing library and command-line tool
 Name:		ghc-%{pkgname}
 Version:	0.8.8
-Release:	2
+Release:	3
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/aeson-pretty
