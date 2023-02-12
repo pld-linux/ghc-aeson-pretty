@@ -4,6 +4,7 @@
 #
 %define		pkgname	aeson-pretty
 Summary:	JSON pretty-printing library and command-line tool
+Summary(pl.UTF-8):	Biblioteka i narzędzie linii poleceń do ładnego wypisywania JSON-a
 Name:		ghc-%{pkgname}
 Version:	0.8.8
 Release:	3
@@ -53,7 +54,20 @@ for human readers.
 
 The command-line tool reads JSON from stdin and writes prettified JSON
 to stdout. It also offers a complementary "compact"-mode, essentially
-the opposite of pretty-printing. If you specify -flib-only like this
+the opposite of pretty-printing.
+
+%description -l pl.UTF-8
+Biblioteka ładnie wypisująca format JSON, zgodna z aeson wraz z
+narzędziem linii poleceń poprawiającym czytelność strumieni danych
+JSON.
+
+Biblioteka udostępnia funkcję "encodePretty". Jest to zamiennik
+funkcji "encode" z aeson, tworzący obiekty JSON-ByteString czytelne
+dla człowieka.
+
+Narzędzie linii poleceń czyta dane JSON ze standardowego wejścia i
+wypisuje ładniejszy JSON na wyjście. Oferuje także uzupełniający tryb
+"kompaktowy", zasadniczo będący odwrotnością ładnego wypisywania.
 
 %package prof
 Summary:	Profiling %{pkgname} library for GHC
@@ -117,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/aeson-pretty
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.so
+%attr(755,root,root) %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.so
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*.a
 %exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/*_p.a
 
