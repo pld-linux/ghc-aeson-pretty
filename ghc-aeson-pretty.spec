@@ -14,28 +14,38 @@ Group:		Development/Languages
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	2c323511f2ce49171a6312b579f73ef2
 URL:		http://hackage.haskell.org/package/aeson-pretty
-BuildRequires:	ghc >= 6.12.3
-BuildRequires:	ghc-aeson
+# for ghc < 8.0 also ghc-semigroups >=0.18.2
+BuildRequires:	ghc >= 8.0
+BuildRequires:	ghc-aeson >= 0.7
 BuildRequires:	ghc-attoparsec >= 0.10
+BuildRequires:	ghc-base >= 4.5
+BuildRequires:	ghc-base-compat >= 0.9
+BuildRequires:	ghc-bytestring >= 0.9
 BuildRequires:	ghc-cmdargs >= 0.7
-BuildRequires:	ghc-scientific
-BuildRequires:	ghc-vector
+BuildRequires:	ghc-scientific >= 0.3
+BuildRequires:	ghc-text >= 0.11
+BuildRequires:	ghc-unordered-containers >= 0.1.3.0
+BuildRequires:	ghc-vector >= 0.9
 %if %{with prof}
-BuildRequires:	ghc-prof
+BuildRequires:	ghc-prof >= 7.4.1
 BuildRequires:	ghc-aeson-prof
-BuildRequires:	ghc-attoparsec-prof >= 0.10
-BuildRequires:	ghc-cmdargs-prof >= 0.7
-BuildRequires:	ghc-scientific-prof
-BuildRequires:	ghc-vector-prof
+BuildRequires:	ghc-bytestring-prof >= 0.9
+BuildRequires:	ghc-scientific-prof >= 0.3
+BuildRequires:	ghc-text-prof >= 0.11
+BuildRequires:	ghc-unordered-containers-prof >= 0.1.3.0
+BuildRequires:	ghc-vector-prof >= 0.9
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
 Requires(post,postun):	/usr/bin/ghc-pkg
-Requires:	ghc-aeson
+Requires:	ghc-aeson >= 0.7
 Requires:	ghc-attoparsec >= 0.10
+Requires:	ghc-bytestring >= 0.9
 Requires:	ghc-cmdargs >= 0.7
-Requires:	ghc-scientific
-Requires:	ghc-vector
+Requires:	ghc-scientific >= 0.3
+Requires:	ghc-text >= 0.11
+Requires:	ghc-unordered-containers >= 0.1.3.0
+Requires:	ghc-vector >= 0.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -74,11 +84,12 @@ Summary:	Profiling %{pkgname} library for GHC
 Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	ghc-aeson-prof
-Requires:	ghc-attoparsec-prof >= 0.10
-Requires:	ghc-cmdargs-prof >= 0.7
-Requires:	ghc-scientific-prof
-Requires:	ghc-vector-prof
+Requires:	ghc-aeson-prof >= 0.7
+Requires:	ghc-bytestring-prof >= 0.9
+Requires:	ghc-scientific-prof >= 0.3
+Requires:	ghc-text-prof >= 0.11
+Requires:	ghc-unordered-containers-prof >= 0.1.3.0
+Requires:	ghc-vector-prof >= 0.9
 
 %description prof
 Profiling %{pkgname} library for GHC.  Should be installed when
@@ -100,6 +111,7 @@ runhaskell Setup.hs configure -v2 \
 	--docdir=%{_docdir}/%{name}-%{version}
 
 runhaskell Setup.hs build
+
 runhaskell Setup.hs haddock
 
 %install
